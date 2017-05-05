@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="author" content="LaLicorne">
+    <meta name="description" content="Description de la page pour les moteurs de recherche" />
+    <meta name="keywords" content="mots-clefs séparés par des virgules" />
+    <title>Todo Liste en Javascript</title>
+    <link rel="stylesheet" href="styles.css" />
+    <!--[if lt IE 9]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+    <!--si t'es un vieux navigateur, t'as besoin de ça pour comprendre la nouvelle ossature de page issue de html5-->
+</head>
+
+<body>
+    <em>NB : la liste n'est pas retenue si actualisation de la page</em>
+
+    <form method="POST" action="">
+        <fieldset>
+            <p><label for="nomTache">Intitulé</label><br/>
+                <input id="nomTache" name="nomTache" type="text" /></p>
+
+            <p><label for="detailTache">Détails</label><br/>
+                <textarea id="detailTache" name="detailTache"></textarea></p>
+
+            <input type="submit" value="Ajouter" />
+
+        </fieldset>
+    </form>
+
+    <section id="liste">
+    </section>
+
+    <script type="text/javascript" src="gestion-listing.js"></script>
+</body>
+
+</html>
