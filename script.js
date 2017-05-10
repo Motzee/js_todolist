@@ -1,8 +1,5 @@
 //variables pré-établies
 let listeTaches = []; //liste des tâches
-let tacheID = 0; //id de la prochaine tâche inscrite
-
-
 
 /* CONTROLEUR  d'événements */
 //lors d'un clic sur le bouton ajouter : on récupère le contenu du formulaire et on appelle la fonction d'ajout avec
@@ -14,63 +11,72 @@ boutonAjout.addEventListener("submit", function(e) {
     let tacheTitre = document.getElementById('nomTache').value;
     let tacheDetail = document.getElementById('detailTache').value;
 
-    ajoutTache(tacheID, tacheTitre, tacheDetail);
+    ajoutTache(tacheTitre, tacheDetail);
 
-    tacheID++;
-
-    //pour test :
-    afficheTaches(listeTaches);
-    //fin pour test
-});
-
-
-//lors d'un clic sur un bouton de suppression : on récupère l'id du bouton et on appelle la fonction de suppression
-let boutonSuppr = document.querySelectorAll("button");
-boutonSuppr.addEventListener("click", function(e) {
-    let idSupprime = ;
-    /*
-    document.getElementById('detailTache')
-    target, id*/
-
-    supprimeTache(listeTaches, idSupprime);
-
-    //pour test :
-    afficheTaches(listeTaches);
-    //fin pour test
 });
 
 
 /* FONCTIONS du MODELE */
+
 //Ajout d'une tâche
-function ajoutTache(id, titre, detail) {
-    listeTaches[id] = {
-        id: id,
+function ajoutTache(titre, detail) {
+    listeTaches[listeTaches.length] = {
         titre: titre,
         detail: detail
     }
     console.log("Tâche ajoutée");
+    afficheTaches(listeTaches);
 }
 
-//Suppression d'une tâche
+//suppression d'une tâche
 function supprimeTache(tableau, id) {
     tableau.splice(id, 1);
     console.log("Tâche supprimée");
+    afficheTaches(listeTaches);
 }
 
-//Affichage de la liste
+
+//affichage de la liste des tâches
 function afficheTaches(tableau) {
-    for (key in tableau) {
-        console.log(tableau[key]);
+    //vidage de la zone
+    document.getElementById("liste").innerHTML = null;
+
+    //réécriture de la liste
+    for (let valeur of tableau) {
+        //création div
+        let ajoutDiv = document.createElement("div");
+
+        //Création et remplissage strong
+        let ajoutStrong = document.createElement("strong");
+        ajoutStrong.textContent = valeur['titre'] + " : ";
+
+        //création et remplissage span
+        let ajoutSpan = document.createElement("span");
+        ajoutSpan.textContent = valeur['detail'] + " ";
+
+        //création et remplissage bouton
+        let boutonX = document.createElement("button");
+        boutonX.textContent = "X";
+
+        //ajout strong, span et bouton dans div
+        ajoutDiv.appendChild(ajoutStrong);
+        ajoutDiv.appendChild(ajoutSpan);
+        ajoutDiv.appendChild(boutonX);
+
+        //injection de div dans la page
+        document.getElementById("liste").appendChild(ajoutDiv);
+
+        //création de l'événement sur le truc
+        boutonX.addEventListener("click", function() {
+
+            //ici*
+            supprimeTache(listeTaches, 2);
+        });
+
     }
 }
+
 /*
-ajoutTache(42, "Titre 42", "Détail 42") ;
-ajoutTache(1, "Titre 1", "Détail 1") ;
-ajoutTache(2, "Titre 2", "Détail 2") ;
-ajoutTache(3, "Titre 3", "Détail 3") ;
-
-afficheTaches(listeTaches)
-
-supprimeTache(listeTaches, 2)
-
+A finir : ici*
+Trouve rle moyen de récupérer le numéro d'entrée du truc cliqué, ou mettre un id, ou un autre truc...
 */
