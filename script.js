@@ -41,18 +41,23 @@ function afficheTaches(tableau) {
     //vidage de la zone
     document.getElementById("liste").innerHTML = null;
 
+
+    /*Test d'une autre boucle for*/
     //réécriture de la liste
-    for (let valeur of tableau) {
+    for (let value of tableau) {
+        console.log(value);
+        console.log(Object.keys(value));
+
         //création div
         let ajoutDiv = document.createElement("div");
 
         //Création et remplissage strong
         let ajoutStrong = document.createElement("strong");
-        ajoutStrong.textContent = valeur['titre'] + " : ";
+        ajoutStrong.textContent = value['titre'] + " : ";
 
         //création et remplissage span
         let ajoutSpan = document.createElement("span");
-        ajoutSpan.textContent = valeur['detail'] + " ";
+        ajoutSpan.textContent = value['detail'] + " ";
 
         //création et remplissage bouton
         let boutonX = document.createElement("button");
@@ -66,16 +71,13 @@ function afficheTaches(tableau) {
         //injection de div dans la page
         document.getElementById("liste").appendChild(ajoutDiv);
 
-        //création de l'événement sur le truc
         boutonX.addEventListener("click", function() {
-
-            //ici*
-            supprimeTache(listeTaches, 2);
+            let idTableau = 2;
+            supprimeTache(listeTaches, idTableau);
         });
 
     }
 }
-
 /*
 A finir : ici*
 Trouve rle moyen de récupérer le numéro d'entrée du truc cliqué, ou mettre un id, ou un autre truc...
