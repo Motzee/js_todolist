@@ -22,7 +22,12 @@ boutonAjout.addEventListener("submit", function(e) {
 function ajoutTache(titre, detail) {
     listeTaches[listeTaches.length] = {
         titre: titre,
-        detail: detail
+        detail: detail,
+
+
+
+
+
     }
     console.log("Tâche ajoutée");
     afficheTaches(listeTaches);
@@ -41,30 +46,68 @@ function afficheTaches(tableau) {
     //vidage de la zone
     document.getElementById("liste").innerHTML = null;
 
+    //création et insertion du titre
+    let titreToDoListe = document.createElement("h1");
+    titreToDoListe.textContent = "To Do Liste";
+    document.getElementById("liste").appendChild(titreToDoListe);
+
     for (let i = 0; i < tableau.length; i++) {
 
-        //création div
+        //création d'article pour une tâche
+        let ajoutArticle = document.createElement("article");
+
+        //création d'un séparateur
+        let separateur = document.createElement("hr");
+        separateur.className = "separe";
+
+        //création d'une div pour l'urgence
+        let urgence = document.createElement("div");
+        urgence.className = "urgent";
+        urgence.textContent = "!"; //si c'ets urgent marquer !, sinon vide
+
+        //création d'une div pour le pictogramme de catégorie
+        let catego = document.createElement("div");
+        catego.className = "catego";
+        catego.textContent = "[joli]"; //contiendra en fait une image (à ajouter, lien en fonction de la catégorie)
+
+        //création d'une div pour la tâche
         let ajoutDiv = document.createElement("div");
-
-        //Création et remplissage strong
-        let ajoutStrong = document.createElement("strong");
-        ajoutStrong.textContent = tableau[i].titre + " : ";
-
-        //création et remplissage span
-        let ajoutSpan = document.createElement("span");
-        ajoutSpan.textContent = tableau[i].detail + " ";
+        ajoutDiv.className = "presenteTache";
 
         //création et remplissage bouton
         let boutonX = document.createElement("button");
         boutonX.textContent = "X";
 
-        //ajout strong, span et bouton dans div
-        ajoutDiv.appendChild(ajoutStrong);
-        ajoutDiv.appendChild(ajoutSpan);
-        ajoutDiv.appendChild(boutonX);
+        //Création et remplissage titre de tâche
+        let ajoutTitre = document.createElement("h2");
+        ajoutTitre.textContent = tableau[i].titre + " : ";
 
-        //injection de div dans la page
-        document.getElementById("liste").appendChild(ajoutDiv);
+        //création et remplissage p
+        let ajoutP = document.createElement("p");
+        ajoutP.textContent = tableau[i].detail;
+
+        //création et remplissage span pour date limite
+        let ajoutDatelimite = document.createElement("span");
+        ajoutDatelimite.textContent = "//" + "date limite";
+
+        //remplissage du paragraphe de détail de la tâche
+        ajoutP.appendChild(document.createElement("br"));
+        ajoutP.appendChild(ajoutDatelimite);
+
+        //remplissage de la div pour la tâche
+        ajoutDiv.appendChild(boutonX);
+        ajoutDiv.appendChild(ajoutTitre);
+        ajoutDiv.appendChild(ajoutP);
+
+        //remplissage de l'article
+        ajoutArticle.appendChild(urgence);
+        ajoutArticle.appendChild(catego);
+        ajoutArticle.appendChild(ajoutDiv);
+
+
+        //injection de l'article et d'un séparateur dans la page
+        document.getElementById("liste").appendChild(ajoutArticle);
+        document.getElementById("liste").appendChild(separateur);
 
         boutonX.addEventListener("click", function() {
             let idTableau = i;
@@ -73,47 +116,3 @@ function afficheTaches(tableau) {
     }
 
 }
-
-
-/*   
-
-    /*Test d'une autre boucle for
-    //réécriture de la liste
-    for (let value of tableau) {
-        console.log(value);
-        console.log(Object.keys(value));
-
-        //création div
-        let ajoutDiv = document.createElement("div");
-
-        //Création et remplissage strong
-        let ajoutStrong = document.createElement("strong");
-        ajoutStrong.textContent = value['titre'] + " : ";
-
-        //création et remplissage span
-        let ajoutSpan = document.createElement("span");
-        ajoutSpan.textContent = value['detail'] + " ";
-
-        //création et remplissage bouton
-        let boutonX = document.createElement("button");
-        boutonX.textContent = "X";
-
-        //ajout strong, span et bouton dans div
-        ajoutDiv.appendChild(ajoutStrong);
-        ajoutDiv.appendChild(ajoutSpan);
-        ajoutDiv.appendChild(boutonX);
-
-        //injection de div dans la page
-        document.getElementById("liste").appendChild(ajoutDiv);
-
-        boutonX.addEventListener("click", function() {
-            let idTableau = 2;
-            supprimeTache(listeTaches, idTableau);
-        });
-
-    }
-}
-/*
-A finir : ici*
-Trouve rle moyen de récupérer le numéro d'entrée du truc cliqué, ou mettre un id, ou un autre truc...
-*/
