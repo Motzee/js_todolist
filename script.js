@@ -19,15 +19,14 @@ boutonAjout.addEventListener("submit", function(e) {
 /* FONCTIONS du MODELE */
 
 //Ajout d'une tâche
-function ajoutTache(titre, detail) {
+function ajoutTache(titre, detail, urgence, domaine, duree, peremption) {
     listeTaches[listeTaches.length] = {
         titre: titre,
         detail: detail,
-
-
-
-
-
+        urgence: urgence,
+        domaine: domaine,
+        duree: duree,
+        peremption: peremption
     }
     console.log("Tâche ajoutée");
     afficheTaches(listeTaches);
@@ -116,3 +115,9 @@ function afficheTaches(tableau) {
     }
 
 }
+
+/*
+Modifier l'appel d'ajoutTache dans l'event pour lui passer les nouveaux arguments
+Intégrer dans l'affichage des tâches les variables issues de la table
+
+Manquera l'affichage de la durée*/
