@@ -41,8 +41,43 @@ function afficheTaches(tableau) {
     //vidage de la zone
     document.getElementById("liste").innerHTML = null;
 
+    for (let i = 0; i < tableau.length; i++) {
 
-    /*Test d'une autre boucle for*/
+        //création div
+        let ajoutDiv = document.createElement("div");
+
+        //Création et remplissage strong
+        let ajoutStrong = document.createElement("strong");
+        ajoutStrong.textContent = tableau[i].titre + " : ";
+
+        //création et remplissage span
+        let ajoutSpan = document.createElement("span");
+        ajoutSpan.textContent = tableau[i].detail + " ";
+
+        //création et remplissage bouton
+        let boutonX = document.createElement("button");
+        boutonX.textContent = "X";
+
+        //ajout strong, span et bouton dans div
+        ajoutDiv.appendChild(ajoutStrong);
+        ajoutDiv.appendChild(ajoutSpan);
+        ajoutDiv.appendChild(boutonX);
+
+        //injection de div dans la page
+        document.getElementById("liste").appendChild(ajoutDiv);
+
+        boutonX.addEventListener("click", function() {
+            let idTableau = i;
+            supprimeTache(listeTaches, idTableau);
+        });
+    }
+
+}
+
+
+/*   
+
+    /*Test d'une autre boucle for
     //réécriture de la liste
     for (let value of tableau) {
         console.log(value);
