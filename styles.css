@@ -1,7 +1,9 @@
+    * {
+        box-sizing: border-box;
+    }
+    
     body {
-        background: url("ressources_public/Lieth-b.jpg") no-repeat left top fixed;
-        background-color: #fafafa !important;
-        background-size: auto 100%;
+        background-color: hsl(47, 95%, 62%);
         min-height: 100vh;
     }
     
@@ -13,16 +15,29 @@
         margin-top: 2em;
     }
     
+    input,
+    textarea,
+    select {
+        width: 60%;
+    }
+    
     @media screen and (max-width: 599px) {
         form {
             width: 320px;
         }
+        input,
+        textarea,
+        select {
+            width: 90%;
+        }
     }
     
     #liste {
-        width: 600px;
         margin: auto;
         margin-top: 2em;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
     }
     
     #liste button {
@@ -40,6 +55,7 @@
     
     h1 {
         text-align: center;
+        width: 100%;
     }
     
     fieldset>legend {
@@ -48,29 +64,11 @@
         font-weight: bold;
         font-size: 1.2em;
     }
-    
-    select {
-        width: 10em;
-    }
-    
-    .inactifPourLinstant {
-        display: none;
-    }
     /* Liste de tâches */
     
-    article {
-        display: flex;
-    }
-    
-    .urgent {
-        width: 25px;
-        color: red;
-        font-weight: bold;
-        font-size: 2em;
-    }
-    
-    .catego {
+    .duree {
         width: 50px;
+        float: left;
     }
     
     .presenteTache {
@@ -84,4 +82,46 @@
     
     h2+p {
         margin-top: 0;
+    }
+    /* Listes de catégories de tâches*/
+    
+    section {
+        width: 45%;
+        min-width: 320px;
+        border: 1px dotted grey;
+        border-radius: 3rem;
+        background: white;
+        margin-top: 2rem;
+    }
+    
+    h2 {
+        text-align: center;
+    }
+    /*Tache*/
+    
+    .urgent,
+    .urgent-unpeu,
+    .urgent-tres {
+        width: 25px;
+        font-weight: bold;
+        font-size: 2em;
+        float: left;
+    }
+    
+    .urgent {
+        color: transparent;
+    }
+    
+    .urgent-unpeu {
+        color: green;
+    }
+    
+    .urgent-tres {
+        color: red;
+    }
+    /* Footer */
+    
+    footer {
+        margin-top: 2rem;
+        text-align: center;
     }
